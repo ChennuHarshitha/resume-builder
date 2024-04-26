@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Resume</title>
+</head>
+<body>
+<h2>Resume Details</h2>
+<table>
+    <tr>
+        <th>First Name</th>
+        <td th:text="${resume != null ? resume.firstName : ''}"></td>
+    </tr>
+    <tr>
+        <th>Last Name</th>
+        <td th:text="${resume != null ? resume.lastName : ''}"></td>
+    </tr>
+    <tr>
+        <th>Mobile Number</th>
+        <td th:text="${resume != null ? resume.num : ''}"></td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td th:text="${resume != null ? resume.email : ''}"></td>
+    </tr>
+    <tr>
+        <th>Education</th>
+        <td>
+            <ul th:if="${resume != null && resume.education != null}">
+                <li th:each="edu : ${resume.education}">
+                    <span th:text="${edu.course} + ' at ' + edu.university + ' (' + #dates.format(edu.startDate, 'dd-MM-yyyy') + ' - ' + #dates.format(edu.endDate, 'dd-MM-yyyy') + ')'"></span>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th>Experience</th>
+        <td>
+            <ul th:if="${resume != null && resume.experience != null}">
+                <li th:each="exp : ${resume.experience}">
+                    <span th:text="${exp.jobRole} + ' at ' + exp.companyName + ' (' + #dates.format(exp.startDate, 'dd-MM-yyyy') + ' - ' + #dates.format(exp.endDate, 'dd-MM-yyyy') + ')'"></span>
+                </li>
+            </ul>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
